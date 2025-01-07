@@ -41,18 +41,3 @@ const playlistData = Array.from(videos).map((video) => {
 });
 
 chrome.runtime.sendMessage({ action: "playlist_data", data: playlistData });
-
-function exportToExcel(data) {
-  const worksheet = XLSX.utils.json_to_sheet(data);
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Playlist");
-
-  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
-  const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "YouTube_Playlist.xlsx";
-  link.click();
-}
-
-exportToExcel(playlistData);
