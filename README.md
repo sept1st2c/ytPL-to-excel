@@ -4,7 +4,7 @@ A small script that converts a YouTube playlist into an Excel file. This can be 
 
 ---
 
-## 🚀 Features
+##  Features
 
 - Extracts key details from YouTube playlist videos, such as:
   - **Video Title**
