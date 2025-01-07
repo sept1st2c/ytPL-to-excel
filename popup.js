@@ -1,6 +1,16 @@
 document.getElementById("export").addEventListener("click", () => {
-  chrome.runtime.sendMessage({ action: "extract_playlist" });
-  //service worker jo background.js h usko message bhej rha ye ig.
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs.length > 0) {
+      // Get the active tab ID from the tabs array
+      const activeTab = tabs[0];
+
+      // Send the message with the tab information
+      chrome.runtime.sendMessage({
+        action: "extract_playlist",
+        tabId: activeTab.id, // Pass the tabId
+      });
+    }
+  });
 });
 
 // Listener for playlist data
